@@ -1,0 +1,15 @@
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.idea
+.DS_Store
+angular-phonecat-snapshots
+bower_components/
+/app/assets/
+/app/dist/
+/coverage/
+/Locksmith.safariextension/icon.png
+/Locksmith.safariextension/app
+locksmith.zip
+*.safariextz

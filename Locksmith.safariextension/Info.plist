@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Thomas A. de Ruiter</string>
+	<key>Builder Version</key>
+	<string>10600.8.9</string>
+	<key>CFBundleDisplayName</key>
+	<string>Locksmith</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.sentiampc.locksmith</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.10</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<real>5242880</real>
+		<key>Popovers</key>
+		<array>
+			<dict>
+				<key>Filename</key>
+				<string>app/index.html</string>
+				<key>Height</key>
+				<real>512</real>
+				<key>Identifier</key>
+				<string>locksmith</string>
+				<key>Width</key>
+				<real>290</real>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>locksmith</string>
+				<key>Image</key>
+				<string>icon.png</string>
+				<key>Label</key>
+				<string>Locksmith</string>
+				<key>Popover</key>
+				<string>locksmith</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>Description</key>
+	<string>Locksmith for Safari</string>
+	<key>DeveloperIdentifier</key>
+	<string>GJ7U6Q7RLE</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://www.sentia.com</string>
+</dict>
+</plist>

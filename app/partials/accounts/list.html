@@ -1,0 +1,18 @@
+<label class="item item-input">
+	<i class="icon ion-search placeholder-icon"></i>
+	<input
+		tabindex="1"
+		id="search"
+		type="text"
+		placeholder="Search"
+		ng-model="query"
+	/>
+</label>
+<a
+	class="item item-icon-right"
+	ui-sref="accounts.show({accountId: account.id})"
+	ng-repeat="account in accounts.accounts |filter:query | orderBy:orderProp"
+>
+	{{account.name}}
+	<i class="icon ion-ios-arrow-forward"></i>
+</a>

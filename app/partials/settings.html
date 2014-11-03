@@ -1,0 +1,127 @@
+<ion-content overflow-scroll="true" class="has-header has-footer">
+	<form>
+		<div class="card">
+			<div class="item item-body">
+				<img class="full-image" src="dist/img/sentia.png" />
+			</div>
+		</div>
+		
+		<div class="card">
+			<div class="item item-divider">Locksmith</div>
+
+			<div class="item item-toggle">
+				Use Local Storage
+	  			<label class="toggle toggle-balanced">
+					<input
+					    type="checkbox"
+						ng-model="$settings.use_local_storage"
+					/>
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+				</label>
+			</div>
+
+			<div class="item item-toggle">
+				Use Incognito Sessions
+	  			<label class="toggle toggle-balanced">
+					<input
+					    type="checkbox"
+						ng-model="$settings.incognito_sessions"
+					/>
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+				</label>
+			</div>
+		</div>
+
+		<div ng-show="!$settings.use_local_storage" class="card">
+			<div class="item item-divider">Locksmit API</div>
+
+			<label class="item item-input item-stacked-label">
+	  			<span class="input-label">URL</span>
+				<input
+				    type="text"
+					id="api"
+					ng-model="$settings.api"
+					placeholder="https://locksmith.io/api"
+				/>
+			</label>
+
+			<label class="item item-input item-stacked-label">
+	  			<span class="input-label">Username</span>
+				<input
+				    type="text"
+					id="api"
+					ng-model="$settings.api_username"
+					placeholder="john.doe@example.com"
+				/>
+			</label>
+
+			<label class="item item-input item-stacked-label">
+	  			<span class="input-label">Password</span>
+				<input
+				    type="password"
+					id="api"
+					ng-model="$settings.api_password"
+					placeholder="sUper5ecret!"
+				/>
+			</label>
+		</div>
+
+		<div class="card">
+			<div class="item item-divider">AWS Credentials</div>
+
+			<label class="item item-input item-stacked-label">
+	  			<span class="input-label">Access Key ID</span>
+				<input
+				    type="text"
+					id="aws_access_key_id"
+					ng-model="$settings.aws_access_key_id"
+					placeholder="AKIAXXXXXXXXXXXXXXXX"
+				/>
+			</label>
+
+			<label class="item item-input item-stacked-label">
+	  			<span class="input-label">Secret Access Key</span>
+				<input
+				    type="password"
+					id="aws_secret_access_key"
+					ng-model="$settings.aws_secret_access_key"
+					placeholder="pUtY0urAws-S3cr3tAcce55K3yHere/LikeTh1s="
+				/>
+			</label>
+
+			<label class="item item-input item-stacked-label">
+	  			<span class="input-label">MFA Token Serial Number</span>
+				<input
+				    type="text"
+					id="mfa_serial_number"
+					ng-model="$settings.mfa_serial_number"
+					placeholder="arn:aws:iam::12345654321:mfa/johndoe"
+				/>
+			</label>
+		</div>
+
+		<div ng-show="!$settings.use_local_storage" class="card">
+			<div class="item item-divider">Management</div>
+
+			<div class="item item-toggle">
+				Account Management
+	  			<label class="toggle toggle-balanced">
+					<input
+					    type="checkbox"
+						ng-model="$settings.account_management"
+					/>
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+				</label>
+			</div>
+		</div>
+	</form>
+
+
+	<p>&nbsp;</p>
+</ion-content>
