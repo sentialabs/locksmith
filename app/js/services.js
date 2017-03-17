@@ -146,34 +146,57 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
         var deferred = $q.defer();
 
         setTimeout(function() {
-            var credentials = {
-                accessKeyId: window.settings.aws_access_key_id,
-                secretAccessKey: window.settings.aws_secret_access_key
-            };
+            if (window.settings.use_switch_role) {
 
-            var params = {
-                RoleArn: 'arn:aws:iam::' + bookmark.account_number + ':role/' + bookmark.role_name,
-                RoleSessionName: 'AssumeRoleSession'
-            };
+                var request_url = "https://signin.aws.amazon.com/switchrole";
 
-            if (token_code) {
-                params['SerialNumber'] = window.settings.mfa_serial_number;
-                params['TokenCode'] = token_code;
-            }
+                request_url += "?account=";
+                request_url += encodeURIComponent(bookmark.account_number);
+                request_url += "&roleName=";
+                request_url += encodeURIComponent(bookmark.role_name);
+                request_url += "&displayName=";
+                request_url += encodeURIComponent(bookmark.name);
 
-            var sts = new AWS.STS(credentials);
-            sts.assumeRole(params, function(err, data) {
-                if (err) {
-                    deferred.reject(err);
+                if (chrome) {
+                    chrome.windows.create({
+                        url: request_url,
+                        incognito: window.settings.incognito_sessions
+                    });
                 } else {
-                    signin.getSigninToken(
-                        data.Credentials.AccessKeyId,
-                        data.Credentials.SecretAccessKey,
-                        data.Credentials.SessionToken
-                    );
-                    deferred.resolve();
+                    window.location.href = request_url;
                 }
-            });
+
+                deferred.resolve();
+            } else {
+                var credentials = {
+                    accessKeyId: window.settings.aws_access_key_id,
+                    secretAccessKey: window.settings.aws_secret_access_key
+                };
+
+                var params = {
+                    RoleArn: 'arn:aws:iam::' + bookmark.account_number + ':role/' + bookmark.role_name,
+                    RoleSessionName: 'AssumeRoleSession'
+                };
+
+                if (token_code) {
+                    params['SerialNumber'] = window.settings.mfa_serial_number;
+                    params['TokenCode'] = token_code;
+                }
+
+                var sts = new AWS.STS(credentials);
+                sts.assumeRole(params, function(err, data) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        signin.getSigninToken(
+                            data.Credentials.AccessKeyId,
+                            data.Credentials.SecretAccessKey,
+                            data.Credentials.SessionToken
+                        );
+                        deferred.resolve();
+                    }
+                });
+            }
         }, 0);
 
         return deferred.promise;

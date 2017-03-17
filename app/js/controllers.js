@@ -14,6 +14,9 @@ locksmithControllers.controller(
                 'use_local_storage': {
                     type: 'boolean'
                 },
+                'use_switch_role': {
+                    type: 'boolean'
+                },
                 'incognito_sessions': {
                     type: 'boolean'
                 },

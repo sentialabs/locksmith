@@ -23,6 +23,19 @@
 			</div>
 
 			<div class="item item-toggle">
+				Use Switch Role
+	  			<label class="toggle toggle-balanced">
+					<input
+					    type="checkbox"
+						ng-model="$settings.use_switch_role"
+					/>
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+				</label>
+			</div>
+
+			<div ng-show="!$settings.use_switch_role" class="item item-toggle">
 				Use Incognito Sessions
 	  			<label class="toggle toggle-balanced">
 					<input
@@ -70,7 +83,7 @@
 			</label>
 		</div>
 
-		<div class="card">
+		<div ng-show="!$settings.use_switch_role" class="card">
 			<div class="item item-divider">AWS Credentials</div>
 
 			<label class="item item-input item-stacked-label">
