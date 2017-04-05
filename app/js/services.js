@@ -147,7 +147,6 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
 
         setTimeout(function() {
             if (window.settings.use_switch_role) {
-
                 var request_url = "https://signin.aws.amazon.com/switchrole";
 
                 request_url += "?account=";
@@ -157,14 +156,7 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
                 request_url += "&displayName=";
                 request_url += encodeURIComponent(bookmark.name);
 
-                if (chrome) {
-                    chrome.windows.create({
-                        url: request_url,
-                        incognito: window.settings.incognito_sessions
-                    });
-                } else {
-                    window.location.href = request_url;
-                }
+                signin.open(request_url);
 
                 deferred.resolve();
             } else {
@@ -244,16 +236,20 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
         var request_url = "https://signin.aws.amazon.com/federation";
         request_url += request_parameters;
 
+        signin.open(request_url);
+    };
+
+    signin.open = function(url) {
         if (window.chrome && chrome.runtime && chrome.runtime.id) {
             chrome.windows.create({
-                url: request_url,
+                url: url,
                 incognito: window.settings.incognito_sessions
             });
         } else if (window.safari && safari.application) {
             var tab = safari.application.openBrowserWindow().activeTab;
-            tab.url = request_url;
+            tab.url = url;
         } else {
-            window.location.href = request_url;
+            window.location.href = url;
         }
     };
 
