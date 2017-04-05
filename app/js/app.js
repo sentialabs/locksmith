@@ -24,6 +24,14 @@ angular.module('ui.gravatar').config([
 locksmithApp.run(function($rootScope, $state, $localStorage) {
     $rootScope.$state = $state;
     window.settings = $rootScope.$settings = $localStorage;
+    window.is_extension = (
+        window.chrome &&
+        chrome.runtime &&
+        chrome.runtime.id
+    ) || (
+        window.safari &&
+        safari.application
+    );
 
     if (typeof window.settings.bookmarks === 'undefined') {
         window.settings.bookmarks = [];

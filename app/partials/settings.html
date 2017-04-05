@@ -35,7 +35,10 @@
 				</label>
 			</div>
 
-			<div ng-show="!$settings.use_switch_role" class="item item-toggle">
+			<div
+			    ng-show="window.is_extension && !$settings.use_switch_role"
+				class="item item-toggle"
+			>
 				Use Incognito Sessions
 	  			<label class="toggle toggle-balanced">
 					<input
