@@ -1,6 +1,13 @@
 html {
   min-width:  320px;
 	min-height: 568px;
+  background-color: #eeeeee;
+}
+
+#window {
+  max-width: 490px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #token_code {
