@@ -146,34 +146,49 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
         var deferred = $q.defer();
 
         setTimeout(function() {
-            var credentials = {
-                accessKeyId: window.settings.aws_access_key_id,
-                secretAccessKey: window.settings.aws_secret_access_key
-            };
+            if (window.settings.use_switch_role) {
+                var request_url = "https://signin.aws.amazon.com/switchrole";
 
-            var params = {
-                RoleArn: 'arn:aws:iam::' + bookmark.account_number + ':role/' + bookmark.role_name,
-                RoleSessionName: 'AssumeRoleSession'
-            };
+                request_url += "?account=";
+                request_url += encodeURIComponent(bookmark.account_number);
+                request_url += "&roleName=";
+                request_url += encodeURIComponent(bookmark.role_name);
+                request_url += "&displayName=";
+                request_url += encodeURIComponent(bookmark.name);
 
-            if (token_code) {
-                params['SerialNumber'] = window.settings.mfa_serial_number;
-                params['TokenCode'] = token_code;
-            }
+                signin.open(request_url);
 
-            var sts = new AWS.STS(credentials);
-            sts.assumeRole(params, function(err, data) {
-                if (err) {
-                    deferred.reject(err);
-                } else {
-                    signin.getSigninToken(
-                        data.Credentials.AccessKeyId,
-                        data.Credentials.SecretAccessKey,
-                        data.Credentials.SessionToken
-                    );
-                    deferred.resolve();
+                deferred.resolve();
+            } else {
+                var credentials = {
+                    accessKeyId: window.settings.aws_access_key_id,
+                    secretAccessKey: window.settings.aws_secret_access_key
+                };
+
+                var params = {
+                    RoleArn: 'arn:aws:iam::' + bookmark.account_number + ':role/' + bookmark.role_name,
+                    RoleSessionName: 'AssumeRoleSession'
+                };
+
+                if (token_code) {
+                    params['SerialNumber'] = window.settings.mfa_serial_number;
+                    params['TokenCode'] = token_code;
                 }
-            });
+
+                var sts = new AWS.STS(credentials);
+                sts.assumeRole(params, function(err, data) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        signin.getSigninToken(
+                            data.Credentials.AccessKeyId,
+                            data.Credentials.SecretAccessKey,
+                            data.Credentials.SessionToken
+                        );
+                        deferred.resolve();
+                    }
+                });
+            }
         }, 0);
 
         return deferred.promise;
@@ -221,16 +236,20 @@ locksmithServices.factory('signin', ['$q', '$http', '$location', function($q, $h
         var request_url = "https://signin.aws.amazon.com/federation";
         request_url += request_parameters;
 
+        signin.open(request_url);
+    };
+
+    signin.open = function(url) {
         if (window.chrome && chrome.runtime && chrome.runtime.id) {
             chrome.windows.create({
-                url: request_url,
+                url: url,
                 incognito: window.settings.incognito_sessions
             });
         } else if (window.safari && safari.application) {
             var tab = safari.application.openBrowserWindow().activeTab;
-            tab.url = request_url;
+            tab.url = url;
         } else {
-            window.location.href = request_url;
+            window.location.href = url;
         }
     };
 
