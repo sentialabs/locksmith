@@ -5,6 +5,7 @@ var locksmithApp = angular.module('locksmithApp', [
     'ui.router',
     'ngStorage',
     'ui.gravatar',
+    'locksmithFilters',
     'locksmithServices',
     'locksmithControllers'
 ]);
