@@ -14,7 +14,7 @@
 		ng-class="{active: $index == position}"
 		ng-click="getToken(bookmark)"
 		ng-repeat="bookmark in bookmarks.bookmarks
-		          |filter:{name:query}
+		          |byNameOrAccountNumber:query
 		          |orderBy:orderProp"
 	>
 		<img ng-if="!gravatar(bookmark)" ng-src="{{bookmark.avatar_url}}" />
