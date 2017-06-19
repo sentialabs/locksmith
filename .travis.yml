@@ -5,4 +5,9 @@ node_js:
 install:
   - npm install
 script: []
-
+deploy:
+  provider: script
+  script: ls -asl
+  on:
+    tags: true
+    all_branches: true
