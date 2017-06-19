@@ -4,10 +4,11 @@ node_js:
   - "7"
 install:
   - npm install
-script: []
+script:
+  - echo hallo
+  - export
 deploy:
   provider: script
   script: ls -asl
   on:
-    tags: true
     all_branches: true
