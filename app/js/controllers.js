@@ -103,6 +103,13 @@ locksmithControllers.controller(
                 return !/https?:\/\//.test(bookmark.avatar_url);
             }
 
+            $scope.is_environment = function(bookmark, environment) {
+                if (bookmark.name.toLowerCase().indexOf(environment) > -1) {
+                    return true;
+                }
+                return false;
+            }
+
             $scope.$watch('data.token_code', function(token_code) {
                 if (token_code && token_code.length == 6) {
                     $('#token_code').attr('disabled', 'disabled');

@@ -19,7 +19,10 @@
 	>
 		<img ng-if="!gravatar(bookmark)" ng-src="{{bookmark.avatar_url}}" />
 		<img ng-if="gravatar(bookmark)" gravatar-src="bookmark.avatar_url || bookmark.name" />
-		<h2>{{bookmark.name}}</h2>
+		<h2>
+			<span class="icon ion-alert red" ng-if="is_environment(bookmark, 'production')" />
+			<span class="icon ion-alert orange" ng-if="is_environment(bookmark, 'acceptance')" />
+			</span>{{bookmark.name}}</h2>
 		<p>{{bookmark.account_number}}/{{bookmark.role_name}}</p>
 		<button
 			class="button button-clear button-positive"
