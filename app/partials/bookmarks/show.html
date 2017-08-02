@@ -34,6 +34,19 @@
 	    ng-model="bookmark.avatar_url"
 	  />
   </label>
+
+  <div class="item item-toggle">
+    Favorite
+      <label class="toggle toggle-balanced">
+      <input
+          type="checkbox"
+        ng-model="bookmark.is_favorite"
+      />
+      <div class="track">
+        <div class="handle"></div>
+      </div>
+    </label>
+  </div>
 </ion-list>
 
 <div class="padding">
@@ -46,4 +59,5 @@
 		class="button button-block button-assertive"
 		ng-click="delete()"
 	>Delete Bookmark</button>
+
 </div>

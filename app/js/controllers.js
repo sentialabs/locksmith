@@ -143,6 +143,17 @@ locksmithControllers.controller(
     ]);
 
 locksmithControllers.controller(
+    'FavoritesIndexController', ['$rootScope', '$scope', '$state', 'Bookmark', '$location', 'signin', '$ionicPopup', '$controller',
+
+        function($rootScope, $scope, $state, Bookmark, $location, signin, $ionicPopup, $controller) {
+            angular.extend(this, $controller('BookmarkIndexController', {
+                $scope: $scope
+            }));
+        }
+    ]);
+
+
+locksmithControllers.controller(
     'BookmarkShowController', ['$scope', '$state', 'Bookmark', '$stateParams',
         function($scope, $state, Bookmark, $stateParams) {
 
@@ -158,6 +169,10 @@ locksmithControllers.controller(
                     $scope.bookmark.$create();
                 }
 
+                if ($scope.bookmark.is_favorite) {
+                    console.log('yep!');
+                }
+
                 $state.go('bookmarks.list');
             };
 
@@ -170,6 +185,7 @@ locksmithControllers.controller(
             };
         }
     ]);
+
 
 locksmithControllers.controller(
     'AccountIndexController', ['$scope', 'Account', '$location',

@@ -106,6 +106,26 @@ locksmithApp.config([
             controller: 'BookmarkShowController',
             templateUrl: 'partials/bookmarks/show.html'
         }).
+        state('favorites', {
+            abstract: true,
+            url: '/favorites',
+            views: {
+                header: {
+                    templateUrl: 'partials/header/bookmarks.html'
+                },
+                main: {
+                    templateUrl: 'partials/bookmarks/index.html'
+                },
+                footer: {
+                    templateUrl: 'partials/footer/footer.html'
+                }
+            }
+        }).
+        state('favorites.list', {
+            url: '',
+            controller: 'FavoritesIndexController',
+            templateUrl: 'partials/favorites/list.html'
+        }).
         state('accounts', {
             abstract: true,
             url: '/accounts',

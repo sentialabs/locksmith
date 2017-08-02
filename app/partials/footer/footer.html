@@ -1,4 +1,12 @@
 <div class="button-bar">
+
+	<button class="button button-clear"
+	        ui-sref="favorites.list"
+	        ng-class="{
+	        	'button-positive': $state.includes('favorites')
+	        }"
+	><i class="icon ion-ios-heart"></i></button>
+
 	<button class="button button-clear"
 	        ui-sref="bookmarks.list"
 	        ng-class="{
