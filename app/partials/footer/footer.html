@@ -2,6 +2,7 @@
 
 	<button class="button button-clear"
 	        ui-sref="favorites.list"
+	        ng-if="$settings.use_favorites"
 	        ng-class="{
 	        	'button-positive': $state.includes('favorites')
 	        }"

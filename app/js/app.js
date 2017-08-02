@@ -44,6 +44,9 @@ locksmithApp.run(function($rootScope, $state, $localStorage) {
     if (typeof window.settings.bookmarks === 'undefined') {
         window.settings.bookmarks = [];
     }
+    if (typeof window.settings.favorites === 'undefined') {
+        window.settings.favorites = [];
+    }
 
     $rootScope.jobs = 0;
 
@@ -101,6 +104,11 @@ locksmithApp.config([
             controller: 'BookmarkIndexController',
             templateUrl: 'partials/bookmarks/list.html'
         }).
+        state('bookmarks.favorites', {
+            url: '',
+            controller: 'FavoritesIndexController',
+            templateUrl: 'partials/favorites/list.html'
+        }).
         state('bookmarks.show', {
             url: '/:bookmarkId',
             controller: 'BookmarkShowController',
@@ -111,10 +119,10 @@ locksmithApp.config([
             url: '/favorites',
             views: {
                 header: {
-                    templateUrl: 'partials/header/bookmarks.html'
+                    templateUrl: 'partials/header/favorites.html'
                 },
                 main: {
-                    templateUrl: 'partials/bookmarks/index.html'
+                    templateUrl: 'partials/favorites/index.html'
                 },
                 footer: {
                     templateUrl: 'partials/footer/footer.html'
@@ -188,6 +196,5 @@ locksmithApp.config([
         });
 
         $urlRouterProvider.otherwise('/bookmarks');
-
     }
 ]);

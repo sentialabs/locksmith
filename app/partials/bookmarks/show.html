@@ -35,7 +35,10 @@
 	  />
   </label>
 
-  <div class="item item-toggle">
+  <div
+    class="item item-toggle"
+    ng-if="$settings.use_favorites"
+    >
     Favorite
       <label class="toggle toggle-balanced">
       <input
