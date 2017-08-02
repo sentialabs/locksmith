@@ -23,6 +23,7 @@ angular.module('ui.gravatar').config([
 ]);
 
 locksmithApp.run(function($rootScope, $state, $localStorage) {
+    console.log('app.run');
     $rootScope.$state = $state;
     window.settings = $rootScope.$settings = $localStorage;
 
@@ -62,6 +63,7 @@ locksmithApp.run(function($rootScope, $state, $localStorage) {
 locksmithApp.config([
     '$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider, $urlRouterProvider, $httpProvider) {
+        console.log('app.config');
         $httpProvider.interceptors.push(function($rootScope) {
             return {
                 request: function(config) {
