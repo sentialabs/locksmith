@@ -2,14 +2,13 @@
 	<a
 		class="item item-avatar item-button-right"
     ng-if="bookmark.is_favorite"
-		ng-class="{active: $index == position}"
-		ng-click="getToken(bookmark)"
+		ng-class="{active: $index == position, 'item-avatar': $settings.hide_avatars == false, 'item-no-avatar': $settings.hide_avatars}"		ng-click="getToken(bookmark)"
 		ng-repeat="bookmark in bookmarks.bookmarks
 		          |byNameOrAccountNumber:query
 		          |orderBy:orderProp"
 	>
-		<img ng-if="!gravatar(bookmark)" ng-src="{{bookmark.avatar_url}}" />
-		<img ng-if="gravatar(bookmark)" gravatar-src="bookmark.avatar_url || bookmark.name" />
+		<img ng-if="!gravatar(bookmark) && !$settings.hide_avatars" ng-src="{{bookmark.avatar_url}}" />
+		<img ng-if="gravatar(bookmark) && !$settings.hide_avatars" gravatar-src="bookmark.avatar_url || bookmark.name" />
 		<h2>{{bookmark.name}}</h2>
 		<p>{{bookmark.account_number}}/{{bookmark.role_name}}</p>
 		<button
