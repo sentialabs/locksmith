@@ -35,18 +35,6 @@
 				</label>
 			</div>
 
-			<div class="item item-toggle">
-				Use Favorites
-	  			<label class="toggle toggle-balanced">
-					<input
-					    type="checkbox"
-						ng-model="$settings.use_favorites"
-					/>
-					<div class="track">
-						<div class="handle"></div>
-					</div>
-				</label>
-			</div>
 
 			<div
 			    ng-show="$is_extension && !$settings.use_switch_role"
@@ -168,6 +156,20 @@
 				</div>
 			</label>
 		</div>
+
+		<div class="item item-toggle">
+			Use Favorites
+				<label class="toggle toggle-balanced">
+				<input
+						type="checkbox"
+					ng-model="$settings.use_favorites"
+				/>
+				<div class="track">
+					<div class="handle"></div>
+				</div>
+			</label>
+		</div>
+
 
 	</div>
 
