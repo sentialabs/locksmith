@@ -1,49 +1,37 @@
 <ion-list>
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">Name</span>
-	  <input
-	  	type="text"
-	    placeholder="My Bookmark"
-	    ng-model="bookmark.name"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input type="text"
+               placeholder="My Bookmark"
+               ng-model="bookmark.name" />
+    </label>
 
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">AWS Account Number</span>
-	  <input
-	  	type="text"
-	    placeholder="12345654321"
-	    ng-model="bookmark.account_number"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">AWS Account Number</span>
+        <input type="text"
+               placeholder="12345654321"
+               ng-model="bookmark.account_number" />
+    </label>
 
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">Role Name</span>
-	  <input
-	  	type="text"
-	    placeholder="johndoe"
-	    ng-model="bookmark.role_name"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">Role Name</span>
+        <input type="text"
+               placeholder="johndoe"
+               ng-model="bookmark.role_name" />
+    </label>
 
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">Avatar URL</span>
-	  <input
-	  	type="text"
-	    placeholder="http://path.to/some_image.png"
-	    ng-model="bookmark.avatar_url"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">Avatar URL</span>
+        <input type="text"
+               placeholder="http://path.to/some_image.png"
+               ng-model="bookmark.avatar_url" />
+    </label>
 </ion-list>
 
 <div class="padding">
-	<button
-		class="button button-block button-positive"
-		ng-click="save()"
-	>Save Bookmark</button>
+    <button class="button button-block button-positive"
+            ng-click="save()">Save Bookmark</button>
 
-	<button
-		class="button button-block button-assertive"
-		ng-click="delete()"
-	>Delete Bookmark</button>
+    <button class="button button-block button-assertive"
+            ng-click="delete()">Delete Bookmark</button>
 </div>

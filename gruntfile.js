@@ -2,8 +2,21 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
     jsbeautifier: {
-      files : ["app/js/**/*.js"],
+      files : [
+        "app/js/**/*.js",
+        "app/partials/**/*.html"
+      ],
       options : {
+        html: {
+          braceStyle: "collapse",
+          indentChar: " ",
+          indentScripts: "keep",
+          indentSize: 4,
+          maxPreserveNewlines: 10,
+          preserveNewlines: true,
+          unformatted: ["a", "sub", "sup", "b", "i", "u"],
+          wrapAttributes: 'force-aligned'
+        }
       }
     },
 
@@ -102,8 +115,9 @@ grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-copy');
 grunt.loadNpmTasks('grunt-zip');
 
+
 // register at least this one task
-grunt.registerTask('default', [ 'jsbeautifier', 'uglify', 'cssmin', 'copy', 'zip' ]);
+grunt.registerTask('default', [ 'jsbeautifier', 'uglify', 'cssmin', 'copy', 'zip']);
 
 
 };

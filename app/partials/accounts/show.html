@@ -1,49 +1,37 @@
 <ion-list>
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">Name</span>
-	  <input
-	  	type="text"
-	    placeholder="My Account"
-	    ng-model="account.name"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input type="text"
+               placeholder="My Account"
+               ng-model="account.name" />
+    </label>
 
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">AWS Account Number</span>
-	  <input
-	  	type="text"
-	    placeholder="12345654321"
-	    ng-model="account.number"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">AWS Account Number</span>
+        <input type="text"
+               placeholder="12345654321"
+               ng-model="account.number" />
+    </label>
 
-  <label class="item item-input item-stacked-label">
-	  <span class="input-label">AWS Access Key ID</span>
-	  <input
-	  	type="text"
-	    placeholder="AKIAXXXXXXXXXXXXXXXX"
-	    ng-model="account.access_key_id"
-	  />
-  </label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">AWS Access Key ID</span>
+        <input type="text"
+               placeholder="AKIAXXXXXXXXXXXXXXXX"
+               ng-model="account.access_key_id" />
+    </label>
 
-	<label class="item item-input item-stacked-label">
-		<span class="input-label">Avatar URL</span>
-		<input
-			type="text"
-			placeholder="http://path.to/some_image.png"
-			ng-model="account.avatar_url"
-		/>
-	</label>
+    <label class="item item-input item-stacked-label">
+        <span class="input-label">Avatar URL</span>
+        <input type="text"
+               placeholder="http://path.to/some_image.png"
+               ng-model="account.avatar_url" />
+    </label>
 </ion-list>
 
 <div class="padding">
-	<button
-		class="button button-block button-positive"
-		ng-click="save()"
-	>Save Account</button>
+    <button class="button button-block button-positive"
+            ng-click="save()">Save Account</button>
 
-	<button
-		class="button button-block button-assertive"
-		ng-click="delete()"
-	>Delete Account</button>
+    <button class="button button-block button-assertive"
+            ng-click="delete()">Delete Account</button>
 </div>
