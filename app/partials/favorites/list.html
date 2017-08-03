@@ -1,18 +1,8 @@
 <ion-list ng-keydown="keydown($event)" id="bookmarks">
-	<label class="item item-input">
-		<i class="icon ion-search placeholder-icon"></i>
-		<input
-			tabindex="1"
-			id="search"
-			type="text"
-			placeholder="Search"
-			ng-model="query"
-		/>
-	</label>
 	<a
-		class="item item-button-right"
-		ng-class="{active: $index == position, 'item-avatar': $settings.hide_avatars == false, 'item-no-avatar': $settings.hide_avatars}"
-		ng-click="getToken(bookmark)"
+		class="item item-avatar item-button-right"
+    ng-if="bookmark.is_favorite"
+		ng-class="{active: $index == position, 'item-avatar': $settings.hide_avatars == false, 'item-no-avatar': $settings.hide_avatars}"		ng-click="getToken(bookmark)"
 		ng-repeat="bookmark in bookmarks.bookmarks
 		          |byNameOrAccountNumber:query
 		          |orderBy:orderProp"

@@ -1,10 +1,19 @@
 <div class="button-bar">
+
+	<button class="button button-clear"
+	        ui-sref="favorites.list"
+	        ng-if="$settings.use_favorites"
+	        ng-class="{
+	        	'button-positive': $state.includes('favorites')
+	        }"
+	><i title="favorites" class="icon ion-ios-heart"></i></button>
+
 	<button class="button button-clear"
 	        ui-sref="bookmarks.list"
 	        ng-class="{
 	        	'button-positive': $state.includes('bookmarks')
 	        }"
-	><i class="icon ion-ios-unlocked"></i></button>
+	><i title="bookmarks" class="icon ion-ios-unlocked"></i></button>
 
 	<button class="button button-clear"
 			ng-show="$settings.account_management"
@@ -12,7 +21,7 @@
 	        ng-class="{
 	        	'button-positive': $state.includes('accounts')
 	        }"
-	><i class="icon ion-cloud"></i></button>
+	><i title="accounts" class="icon ion-cloud"></i></button>
 
 	<button class="button button-clear"
 	        ui-sref="settings"
@@ -20,5 +29,5 @@
 	        	'button-positive': $state.includes('settings'),
 	        	'icon-spin': jobs > 0
 	        }"
-	><i class="icon ion-gear-a"></i></button>
+	><i title="settings" class="icon ion-gear-a"></i></button>
 </div>

@@ -23,6 +23,7 @@ angular.module('ui.gravatar').config([
 ]);
 
 locksmithApp.run(function($rootScope, $state, $localStorage) {
+    console.log('app.run');
     $rootScope.$state = $state;
     window.settings = $rootScope.$settings = $localStorage;
 
@@ -44,6 +45,9 @@ locksmithApp.run(function($rootScope, $state, $localStorage) {
     if (typeof window.settings.bookmarks === 'undefined') {
         window.settings.bookmarks = [];
     }
+    if (typeof window.settings.favorites === 'undefined') {
+        window.settings.favorites = [];
+    }
 
     $rootScope.jobs = 0;
 
@@ -59,6 +63,7 @@ locksmithApp.run(function($rootScope, $state, $localStorage) {
 locksmithApp.config([
     '$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider, $urlRouterProvider, $httpProvider) {
+        console.log('app.config');
         $httpProvider.interceptors.push(function($rootScope) {
             return {
                 request: function(config) {
@@ -101,10 +106,35 @@ locksmithApp.config([
             controller: 'BookmarkIndexController',
             templateUrl: 'partials/bookmarks/list.html'
         }).
+        state('bookmarks.favorites', {
+            url: '',
+            controller: 'FavoritesIndexController',
+            templateUrl: 'partials/favorites/list.html'
+        }).
         state('bookmarks.show', {
             url: '/:bookmarkId',
             controller: 'BookmarkShowController',
             templateUrl: 'partials/bookmarks/show.html'
+        }).
+        state('favorites', {
+            abstract: true,
+            url: '/favorites',
+            views: {
+                header: {
+                    templateUrl: 'partials/header/favorites.html'
+                },
+                main: {
+                    templateUrl: 'partials/favorites/index.html'
+                },
+                footer: {
+                    templateUrl: 'partials/footer/footer.html'
+                }
+            }
+        }).
+        state('favorites.list', {
+            url: '',
+            controller: 'FavoritesIndexController',
+            templateUrl: 'partials/favorites/list.html'
         }).
         state('accounts', {
             abstract: true,
@@ -168,6 +198,5 @@ locksmithApp.config([
         });
 
         $urlRouterProvider.otherwise('/bookmarks');
-
     }
 ]);

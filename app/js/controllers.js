@@ -130,12 +130,25 @@ locksmithControllers.controller(
                 }
             });
 
-            $scope.bookmarks = Bookmark.query();
-            if (typeof $scope.bookmarks.$promise !== 'undefined') {
-                $scope.bookmarks.$promise.then(function(bookmarks) {
-                    window.settings.bookmarks = bookmarks.bookmarks;
-                });
-            }
+            Bookmark.query().$promise.then(function(bookmarks) {
+                // loop through all bookmarks, and check if they are included
+                // in the favorites. If so, mark them as such
+                for (i = 0; i < bookmarks.bookmarks.length; i++) {
+                    var bookmark = bookmarks.bookmarks[i];
+                    bookmarks.bookmarks[i].is_favorite = false;
+                    if (window.settings.favorites.includes(parseInt(bookmark.id))) {
+                        bookmarks.bookmarks[i].is_favorite = true;
+                    }
+                }
+                $scope.bookmarks = bookmarks;
+
+                if (typeof $scope.bookmarks.$promise !== 'undefined') {
+                    $scope.bookmarks.$promise.then(function(bookmarks) {
+                        window.settings.bookmarks = bookmarks.bookmarks;
+                    });
+                }
+            });
+
 
             $scope.orderProp = 'name';
             $('#search').focus();
@@ -143,12 +156,29 @@ locksmithControllers.controller(
     ]);
 
 locksmithControllers.controller(
+    'FavoritesIndexController', ['$rootScope', '$scope', '$state', 'Bookmark', '$location', 'signin', '$ionicPopup', '$controller',
+
+        function($rootScope, $scope, $state, Bookmark, $location, signin, $ionicPopup, $controller) {
+            angular.extend(this, $controller('BookmarkIndexController', {
+                $scope: $scope
+            }));
+
+
+        }
+
+    ]);
+
+
+locksmithControllers.controller(
     'BookmarkShowController', ['$scope', '$state', 'Bookmark', '$stateParams',
         function($scope, $state, Bookmark, $stateParams) {
 
             $scope.bookmarkId = $stateParams.bookmarkId;
-            $scope.bookmark = Bookmark.query({
+            Bookmark.query({
                 bookmarkId: $scope.bookmarkId
+            }).$promise.then(function(bookmark) {
+                bookmark.is_favorite = window.settings.favorites.includes(parseInt(bookmark.id));
+                $scope.bookmark = bookmark;
             });
 
             $scope.save = function() {
@@ -156,6 +186,16 @@ locksmithControllers.controller(
                     $scope.bookmark.$update();
                 } else {
                     $scope.bookmark.$create();
+                }
+
+                if ($scope.bookmark.is_favorite) {
+                    if (!window.settings.favorites.includes(parseInt($scope.bookmark.id))) {
+                        window.settings.favorites.push(parseInt($scope.bookmarkId));
+                    }
+                } else {
+                    window.settings.favorites = window.settings.favorites.filter(function(id) {
+                        return parseInt(id) != parseInt($scope.bookmarkId);
+                    });
                 }
 
                 $state.go('bookmarks.list');
@@ -170,6 +210,7 @@ locksmithControllers.controller(
             };
         }
     ]);
+
 
 locksmithControllers.controller(
     'AccountIndexController', ['$scope', 'Account', '$location',
