@@ -1,30 +1,27 @@
-<ion-list ng-keydown="keydown($event)" id="bookmarks">
-	<label class="item item-input">
-		<i class="icon ion-search placeholder-icon"></i>
-		<input
-			tabindex="1"
-			id="search"
-			type="text"
-			placeholder="Search"
-			ng-model="query"
-		/>
-	</label>
-	<a
-		class="item item-avatar item-button-right"
-		ng-class="{active: $index == position}"
-		ng-click="getToken(bookmark)"
-		ng-repeat="bookmark in bookmarks.bookmarks
-		          |byNameOrAccountNumber:query
-		          |orderBy:orderProp"
-	>
-		<img ng-if="!gravatar(bookmark)" ng-src="{{bookmark.avatar_url}}" />
-		<img ng-if="gravatar(bookmark)" gravatar-src="bookmark.avatar_url || bookmark.name" />
-		<h2>{{bookmark.name}}</h2>
-		<p>{{bookmark.account_number}}/{{bookmark.role_name}}</p>
-		<button
-			class="button button-clear button-positive"
-			ui-sref="bookmarks.show({bookmarkId: bookmark.id})"
-			ng-click="$event.stopPropagation()"
-		><i class="icon ion-ios-information-outline"></i></button>
-	</a>
+<ion-list ng-keydown="keydown($event)"
+          id="bookmarks">
+    <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input tabindex="1"
+               id="search"
+               type="text"
+               placeholder="Search"
+               ng-model="query" />
+    </label>
+    <a class="item item-avatar item-button-right"
+       ng-class="{active: $index == position}"
+       ng-click="getToken(bookmark)"
+       ng-repeat="bookmark in bookmarks.bookmarks
+              |byNameOrAccountNumber:query
+              |orderBy:orderProp">
+        <img ng-if="!gravatar(bookmark)"
+             ng-src="{{bookmark.avatar_url}}" />
+        <img ng-if="gravatar(bookmark)"
+             gravatar-src="bookmark.avatar_url || bookmark.name" />
+        <h2>{{bookmark.name}}</h2>
+        <p>{{bookmark.account_number}}/{{bookmark.role_name}}</p>
+        <button class="button button-clear button-positive"
+                ui-sref="bookmarks.show({bookmarkId: bookmark.id})"
+                ng-click="$event.stopPropagation()"><i class="icon ion-ios-information-outline"></i></button>
+    </a>
 </ion-list>
