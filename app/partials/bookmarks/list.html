@@ -21,15 +21,18 @@
 		<img ng-if="gravatar(bookmark)" gravatar-src="bookmark.avatar_url || bookmark.name" />
 		<h2>
 			</span>{{bookmark.name}}</h2>
-		<p>{{bookmark.account_number}}/{{bookmark.role_name}}</p>
+		<p>
+			<span ng-class="{red: is_environment(bookmark, 'production'), orange: is_environment(bookmark, 'acceptance')}" ng-if="guess_environment(environment)">
+				{{guess_environment(environment)}} -
+			</span>
+			{{bookmark.account_number}}
+		</p>
 		<button
 			class="button button-clear button-positive"
 			ui-sref="bookmarks.show({bookmarkId: bookmark.id})"
 			ng-click="$event.stopPropagation()"
 		>
-			<i class="icon ion-ios-information-outline red" ng-if="is_environment(bookmark, 'production')"></i>
-			<i class="icon ion-ios-information-outline orange" ng-if="is_environment(bookmark, 'acceptance')"></i>
-			<i class="icon ion-ios-information-outline" ng-if="!is_environment(bookmark, 'acceptance') && !is_environment(bookmark, 'production')"></i>
+			<i class="icon ion-ios-information-outline"></i>
 
 		</button>
 	</a>
