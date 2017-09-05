@@ -103,6 +103,31 @@ locksmithControllers.controller(
                 return !/https?:\/\//.test(bookmark.avatar_url);
             }
 
+            $scope.guess_environment = function(bookmark) {
+                environments = [
+                    'Production',
+                    'Acceptance',
+                    'Test',
+                    'UAT',
+                    'Development'
+                ]
+                var guessed_environment = false;
+                angular.forEach(environments, function(environment) {
+                    if (this.bookmark.name.toLowerCase().indexOf(environment.toLowerCase()) > -1) {
+                        this.guessed_environment = environment;
+                    }
+                }, this);
+
+                return this.guessed_environment;
+            }
+
+            $scope.is_environment = function(bookmark, environment) {
+                if (bookmark.name.toLowerCase().indexOf(environment) > -1) {
+                    return true;
+                }
+                return false;
+            }
+
             $scope.$watch('data.token_code', function(token_code) {
                 if (token_code && token_code.length == 6) {
                     $('#token_code').attr('disabled', 'disabled');
