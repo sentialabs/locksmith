@@ -117,7 +117,7 @@ grunt.loadNpmTasks('grunt-zip');
 
 
 // register at least this one task
-grunt.registerTask('default', [ 'jsbeautifier', 'uglify', 'cssmin', 'copy', 'zip']);
+grunt.registerTask('default', [ 'jsbeautifier', 'uglify', 'cssmin', 'copy', 'zip' ]);
 
 
 };
