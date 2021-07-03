@@ -80,7 +80,7 @@ locksmithControllers.controller(
                 var myPopup = $ionicPopup.show({
                     templateUrl: 'partials/bookmarks/otp.html',
                     title: 'MFA Token',
-                    subTitle: 'Please enter token',
+                    subTitle: $scope.bookmark.name,
                     scope: $scope,
                     buttons: [{
                         text: 'Cancel'
